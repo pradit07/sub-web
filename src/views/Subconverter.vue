@@ -405,19 +405,6 @@ export default {
           this.loading = false;
         });
     },
-    notify() {
-      const h = this.$createElement;
-
-      this.$notify({
-        title: "Pemberitahuan Privasi",
-        type: "warning",
-        message: h(
-          "i",
-          { style: "color: teal" },
-          "Berbagai tautan berlangganan (kecuali layanan tautan pendek) menghasilkan implementasi front-end murni tanpa masalah privasi. Layanan konversi back-end disediakan secara default, dan mereka yang peduli dengan privasi harus membangun layanan back-end mereka sendiri."
-         )
-      });
-    },
     confirmUploadConfig() {
       if (this.uploadConfig === "") {
         this.$message.warning("Konfigurasi jarak jauh tidak boleh kosong");
