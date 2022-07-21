@@ -31,22 +31,22 @@
               </el-form-item>
 
               <div v-if="advanced === '2'">
-                <el-form-item label="Alamat Backand:">
+                <el-form-item label="Alamat Backand Sendiri:">
                   <el-autocomplete
                     style="width: 100%"
                     v-model="form.customBackend"
                     :fetch-suggestions="backendSearch"
-                    placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
+                    placeholder="contoh：http://127.0.0.1:25500/sub?"
                   >
                     <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
                   </el-autocomplete>
                 </el-form-item>
-                <el-form-item label="远程配置:">
+                <el-form-item label="Konfigurasi jarak jauh:">
                   <el-select
                     v-model="form.remoteConfig"
                     allow-create
                     filterable
-                    placeholder="请选择"
+                    placeholder="tolong pilih"
                     style="width: 100%"
                   >
                     <el-option-group
@@ -61,43 +61,43 @@
                         :value="item.value"
                       ></el-option>
                     </el-option-group>
-                    <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">配置示例</el-button>
+                    <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">Contoh konfigurasi</el-button>
                   </el-select>
                 </el-form-item>
                 <el-form-item label="Include:">
-                  <el-input v-model="form.includeRemarks" placeholder="节点名包含的关键字，支持正则" />
+                  <el-input v-model="form.includeRemarks" placeholder="Kata kunci yang terkandung dalam nama simpul, mendukung reguler" />
                 </el-form-item>
                 <el-form-item label="Exclude:">
-                  <el-input v-model="form.excludeRemarks" placeholder="节点名不包含的关键字，支持正则" />
+                  <el-input v-model="form.excludeRemarks" placeholder="Kata kunci tidak termasuk dalam nama simpul, dukungan reguler" />
                 </el-form-item>
                 <el-form-item label="FileName:">
-                  <el-input v-model="form.filename" placeholder="返回的订阅文件名" />
+                  <el-input v-model="form.filename" placeholder="Nama file langganan yang dikembalikan" />
                 </el-form-item>
                 <el-form-item label-width="0px">
                   <el-row type="flex">
                     <el-col>
-                      <el-checkbox v-model="form.nodeList" label="输出为 Node List" border></el-checkbox>
+                      <el-checkbox v-model="form.nodeList" label="Keluarannya adalah Node List" border></el-checkbox>
                     </el-col>
                     <el-popover placement="bottom" v-model="form.extraset">
                       <el-row>
                         <el-checkbox v-model="form.emoji" label="Emoji"></el-checkbox>
                       </el-row>
                       <el-row>
-                        <el-checkbox v-model="form.scv" label="跳过证书验证"></el-checkbox>
+                        <el-checkbox v-model="form.scv" label="lewati verifikasi sertifikat"></el-checkbox>
                       </el-row>
                       <el-row>
-                        <el-checkbox v-model="form.udp" @change="needUdp = true" label="启用 UDP"></el-checkbox>
+                        <el-checkbox v-model="form.udp" @change="needUdp = true" label="Memungkinkan UDP"></el-checkbox>
                       </el-row>
                       <el-row>
-                        <el-checkbox v-model="form.appendType" label="节点类型"></el-checkbox>
+                        <el-checkbox v-model="form.appendType" label="Jenis simpul"></el-checkbox>
                       </el-row>
                       <el-row>
-                        <el-checkbox v-model="form.sort" label="排序节点"></el-checkbox>
+                        <el-checkbox v-model="form.sort" label="Urutkan simpul"></el-checkbox>
                       </el-row>
                       <el-row>
-                        <el-checkbox v-model="form.fdn" label="过滤非法节点"></el-checkbox>
+                        <el-checkbox v-model="form.fdn" label="Saring node ilegal"></el-checkbox>
                       </el-row>
-                      <el-button slot="reference">更多选项</el-button>
+                      <el-button slot="reference">lebih banyak pilihan</el-button>
                     </el-popover>
                     <el-popover placement="bottom" style="margin-left: 10px">
                       <el-row>
@@ -107,9 +107,9 @@
                         <el-checkbox v-model="form.tpl.clash.doh" label="Clash.DoH"></el-checkbox>
                       </el-row>
                       <el-row>
-                        <el-checkbox v-model="form.insert" label="网易云"></el-checkbox>
+                        <el-checkbox v-model="form.insert" label="NetEase Cloud"></el-checkbox>
                       </el-row>
-                      <el-button slot="reference">定制功能</el-button>
+                      <el-button slot="reference">fungsi kustom</el-button>
                     </el-popover>
                   </el-row>
                 </el-form-item>
@@ -121,7 +121,7 @@
                 <i class="el-icon-magic-stick"></i>
               </el-divider>
 
-              <el-form-item label="定制订阅:">
+              <el-form-item label="langganan khusus:">
                 <el-input class="copy-content" disabled v-model="customSubUrl">
                   <el-button
                     slot="append"
@@ -129,10 +129,10 @@
                     v-clipboard:success="onCopy"
                     ref="copy-btn"
                     icon="el-icon-document-copy"
-                  >复制</el-button>
+                  >salinan</el-button>
                 </el-input>
               </el-form-item>
-              <el-form-item label="订阅短链:">
+              <el-form-item label="link pendek:">
                 <el-input class="copy-content" disabled v-model="curtomShortSubUrl">
                   <el-button
                     slot="append"
@@ -140,7 +140,7 @@
                     v-clipboard:success="onCopy"
                     ref="copy-btn"
                     icon="el-icon-document-copy"
-                  >复制</el-button>
+                  >salinan</el-button>
                 </el-input>
               </el-form-item>
 
@@ -150,15 +150,15 @@
                   type="danger"
                   @click="makeUrl"
                   :disabled="form.sourceSubUrl.length === 0"
-                >生成订阅链接</el-button>
+                >Buat tautan berlangganan</el-button>
                 <el-button
                   style="width: 120px"
                   type="danger"
                   @click="makeShortUrl"
                   :loading="loading"
                   :disabled="customSubUrl.length === 0"
-                >生成短链接</el-button>
-                <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">一键导入Surge</el-button> -->
+                >Hasilkan tautan pendek</el-button>
+                <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">Impor sekali klik Surge</el-button> -->
               </el-form-item>
 
               <el-form-item label-width="0px" style="text-align: center">
@@ -168,14 +168,14 @@
                   @click="dialogUploadConfigVisible = true"
                   icon="el-icon-upload"
                   :loading="loading"
-                >上传配置</el-button>
+                >Unggah konfigurasi</el-button>
                 <el-button
                   style="width: 120px"
                   type="primary"
                   @click="clashInstall"
                   icon="el-icon-connection"
                   :disabled="customSubUrl.length === 0"
-                >一键导入Clash</el-button>
+                >Impor sekali klik Clash</el-button>
               </el-form-item>
             </el-form>
           </el-container>
@@ -193,7 +193,7 @@
       <div slot="title">
         Remote config upload
         <el-popover trigger="hover" placement="right" style="margin-left: 10px">
-          <el-link type="primary" :href="sampleConfig" target="_blank" icon="el-icon-info">参考配置</el-link>
+          <el-link type="primary" :href="sampleConfig" target="_blank" icon="el-icon-info">Konfigurasi referensi</el-link>
           <i class="el-icon-question" slot="reference"></i>
         </el-popover>
       </div>
@@ -214,7 +214,7 @@
           type="primary"
           @click="confirmUploadConfig"
           :disabled="uploadConfig.length === 0"
-        >确 定</el-button>
+        >Tentu</el-button>
       </div>
     </el-dialog>
   </div>
@@ -235,7 +235,6 @@ export default {
       backendVersion: "",
       advanced: "2",
 
-      // 是否为 PC 端
       isPC: true,
 
       options: {
@@ -316,7 +315,7 @@ export default {
             label: "Special",
             options: [
               {
-                label: "NeteaseUnblock(仅规则，No-Urltest)",
+                label: "NeteaseUnblock(hanya aturan，No-Urltest)",
                 value:
                   "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/special/netease.ini"
               },
