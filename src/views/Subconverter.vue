@@ -31,14 +31,14 @@
               </el-form-item>
 
               <div v-if="advanced === '2'">
-                <el-form-item label="Alamat Backand Sendiri:">
+                <el-form-item label="Alamat:">
                   <el-autocomplete
                     style="width: 100%"
                     v-model="form.customBackend"
                     :fetch-suggestions="backendSearch"
                     placeholder="contoh：http://127.0.0.1:25500/sub?"
                   >
-                    <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
+                    <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">Buka repositori proyek</el-button>
                   </el-autocomplete>
                 </el-form-item>
                 <el-form-item label="Konfigurasi jarak jauh:">
@@ -76,7 +76,7 @@
                 <el-form-item label-width="0px">
                   <el-row type="flex">
                     <el-col>
-                      <el-checkbox v-model="form.nodeList" label="Keluarannya adalah Node List" border></el-checkbox>
+                      <el-checkbox v-model="form.nodeList" label="Hanya Proxy" border></el-checkbox>
                     </el-col>
                     <el-popover placement="bottom" v-model="form.extraset">
                       <el-row>
@@ -150,14 +150,14 @@
                   type="danger"
                   @click="makeUrl"
                   :disabled="form.sourceSubUrl.length === 0"
-                >Buat tautan berlangganan</el-button>
+                >Gasken</el-button>
                 <el-button
                   style="width: 120px"
                   type="danger"
                   @click="makeShortUrl"
                   :loading="loading"
                   :disabled="customSubUrl.length === 0"
-                >Hasilkan tautan pendek</el-button>
+                >Tautan pendek</el-button>
                 <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">Impor sekali klik Surge</el-button> -->
               </el-form-item>
 
@@ -168,14 +168,14 @@
                   @click="dialogUploadConfigVisible = true"
                   icon="el-icon-upload"
                   :loading="loading"
-                >Unggah konfigurasi</el-button>
+                >Unggah</el-button>
                 <el-button
                   style="width: 120px"
                   type="primary"
                   @click="clashInstall"
                   icon="el-icon-connection"
                   :disabled="customSubUrl.length === 0"
-                >Impor sekali klik Clash</el-button>
+                >Impor Ke Clash</el-button>
               </el-form-item>
             </el-form>
           </el-container>
