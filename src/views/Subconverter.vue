@@ -398,7 +398,7 @@ export default {
     },
     clashInstall() {
       if (this.customSubUrl === "") {
-        this.$message.error("请先填写必填项，生成订阅链接");
+        this.$message.error("Silakan isi bidang yang diperlukan terlebih dahulu untuk menghasilkan tautan berlangganan");
         return false;
       }
 
@@ -414,7 +414,7 @@ export default {
     },
     surgeInstall() {
       if (this.customSubUrl === "") {
-        this.$message.error("请先填写必填项，生成订阅链接");
+        this.$message.error("Silakan isi bidang yang diperlukan terlebih dahulu untuk menghasilkan tautan berlangganan");
         return false;
       }
 
@@ -423,7 +423,7 @@ export default {
     },
     makeUrl() {
       if (this.form.sourceSubUrl === "" || this.form.clientType === "") {
-        this.$message.error("订阅链接与客户端为必填项");
+        this.$message.error("Tautan berlangganan dan klien diperlukan");
         return false;
       }
 
@@ -498,11 +498,11 @@ export default {
       }
 
       this.$copyText(this.customSubUrl);
-      this.$message.success("定制订阅已复制到剪贴板");
+      this.$message.success("Langganan khusus disalin ke papan klip");
     },
     makeShortUrl() {
       if (this.customSubUrl === "") {
-        this.$message.warning("请先生成订阅链接，再获取对应短链接");
+        this.$message.warning("Silakan buat tautan berlangganan terlebih dahulu, lalu dapatkan tautan pendek yang sesuai");
         return false;
       }
 
@@ -521,13 +521,13 @@ export default {
           if (res.data.Code === 1 && res.data.ShortUrl !== "") {
             this.curtomShortSubUrl = res.data.ShortUrl;
             this.$copyText(res.data.ShortUrl);
-            this.$message.success("短链接已复制到剪贴板");
+            this.$message.success("Tautan pendek disalin ke papan klip");
           } else {
-            this.$message.error("短链接获取失败：" + res.data.Message);
+            this.$message.error("Gagal mendapatkan tautan pendek：" + res.data.Message);
           }
         })
         .catch(() => {
-          this.$message.error("短链接获取失败");
+          this.$message.error("Gagal mendapatkan tautan pendek");
         })
         .finally(() => {
           this.loading = false;
@@ -537,18 +537,18 @@ export default {
       const h = this.$createElement;
 
       this.$notify({
-        title: "隐私提示",
+        title: "Pemberitahuan Privasi",
         type: "warning",
         message: h(
           "i",
           { style: "color: teal" },
-          "各种订阅链接（短链接服务除外）生成纯前端实现，无隐私问题。默认提供后端转换服务，隐私担忧者请自行搭建后端服务。"
-        )
+          "Berbagai tautan berlangganan (kecuali layanan tautan pendek) menghasilkan implementasi front-end murni tanpa masalah privasi. Layanan konversi back-end disediakan secara default, dan mereka yang peduli dengan privasi harus membangun layanan back-end mereka sendiri."
+         )
       });
     },
     confirmUploadConfig() {
       if (this.uploadConfig === "") {
-        this.$message.warning("远程配置不能为空");
+        this.$message.warning("Konfigurasi jarak jauh tidak boleh kosong");
         return false;
       }
 
@@ -567,7 +567,7 @@ export default {
         .then(res => {
           if (res.data.code === 0 && res.data.data.url !== "") {
             this.$message.success(
-              "远程配置上传成功，配置链接已复制到剪贴板，有效期三个月望知悉"
+              "Unggahan konfigurasi jarak jauh berhasil, tautan konfigurasi telah disalin ke clipboard, dan masa berlaku adalah tiga bulan."
             );
 
             // 自动填充至『表单-远程配置』
@@ -576,11 +576,11 @@ export default {
 
             this.dialogUploadConfigVisible = false;
           } else {
-            this.$message.error("远程配置上传失败: " + res.data.msg);
+            this.$message.error("Unggahan konfigurasi jarak jauh gagal: " + res.data.msg);
           }
         })
         .catch(() => {
-          this.$message.error("远程配置上传失败");
+          this.$message.error("Unggahan konfigurasi jarak jauh gagal");
         })
         .finally(() => {
           this.loading = false;
