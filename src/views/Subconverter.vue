@@ -101,11 +101,7 @@
     </el-dialog>
   </div>
 </template>
-<script lang="ts" setup>
-import { ref } from 'vue'
 
-const form.nodeList = ref(true)
-</script>
 <script>
 const project = process.env.VUE_APP_PROJECT
 const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG
@@ -408,6 +404,19 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+    notify() {
+      const h = this.$createElement;
+
+      this.$notify({
+        title: "Pemberitahuan Privasi",
+        type: "warning",
+        message: h(
+          "i",
+          { style: "color: teal" },
+          "Berbagai tautan berlangganan (kecuali layanan tautan pendek) menghasilkan implementasi front-end murni tanpa masalah privasi. Layanan konversi back-end disediakan secara default, dan mereka yang peduli dengan privasi harus membangun layanan back-end mereka sendiri."
+         )
+      });
     },
     confirmUploadConfig() {
       if (this.uploadConfig === "") {
