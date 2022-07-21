@@ -101,7 +101,11 @@
     </el-dialog>
   </div>
 </template>
+<script lang="ts" setup>
+import { ref } from 'vue'
 
+const form.nodeList = ref(true)
+</script>
 <script>
 const project = process.env.VUE_APP_PROJECT
 const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG
