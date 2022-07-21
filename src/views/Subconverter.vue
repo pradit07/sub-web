@@ -4,7 +4,7 @@
       <el-col>
         <el-card>
           <div slot="header">
-            Subscription Converter
+            Subscription Simple
              </div>
           <el-container>
             <el-form :model="form" label-width="80px" label-position="left" style="width: 100%">
@@ -42,7 +42,7 @@
                 <i class="el-icon-magic-stick"></i>
               </el-divider>
 
-              <el-form-item label="Salin link ini:">
+              <el-form-item label="Hasil:">
                 <el-input class="copy-content" disabled v-model="customSubUrl">
                   <el-button
                     slot="append"
@@ -59,14 +59,7 @@
                   type="danger"
                   @click="makeUrl"
                   :disabled="form.sourceSubUrl.length === 0"
-                >Gasken</el-button>
-                <el-button
-                  style="width: 120px"
-                  type="danger"
-                  @click="makeShortUrl"
-                  :loading="loading"
-                  :disabled="customSubUrl.length === 0"
-                >Tautan pendek</el-button>
+                >Gasken</el-button>              
                 <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">Impor sekali klik Surge</el-button> -->
               </el-form-item>             
             </el-form>
@@ -218,7 +211,7 @@ export default {
         emoji: true,
         nodeList: false,
         extraset: false,
-        sort: false,
+        sort: true,
         udp: false,
         tfo: false,
         scv: false,
