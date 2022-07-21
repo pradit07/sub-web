@@ -8,9 +8,6 @@
              </div>
           <el-container>
             <el-form :model="form" label-width="80px" label-position="left" style="width: 100%">
-              <el-form-item label="Mode:">
-                <el-radio v-model="advanced" label="2">Mode Lanjutan</el-radio>
-              </el-form-item>
               <el-form-item label="Isi Config:">
                 <el-input
                   v-model="form.sourceSubUrl"
