@@ -9,7 +9,6 @@
           <el-container>
             <el-form :model="form" label-width="80px" label-position="left" style="width: 100%">
               <el-form-item label="Mode:">
-                <el-radio v-model="advanced" label="1">Mode Standar</el-radio>
                 <el-radio v-model="advanced" label="2">Mode Lanjutan</el-radio>
               </el-form-item>
               <el-form-item label="Isi Config:">
@@ -28,86 +27,11 @@
               </el-form-item>
 
               <div v-if="advanced === '2'">
-                <el-form-item label="Alamat:">
-                  <el-autocomplete
-                    style="width: 100%"
-                    v-model="form.customBackend"
-                    :fetch-suggestions="backendSearch"
-                    placeholder="contoh：http://127.0.0.1:25500/sub?"
-                  >
-                    <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">Buka repositori proyek</el-button>
-                  </el-autocomplete>
-                </el-form-item>
-                <el-form-item label="Konfigurasi jarak jauh:">
-                  <el-select
-                    v-model="form.remoteConfig"
-                    allow-create
-                    filterable
-                    placeholder="tolong pilih"
-                    style="width: 100%"
-                  >
-                    <el-option-group
-                      v-for="group in options.remoteConfig"
-                      :key="group.label"
-                      :label="group.label"
-                    >
-                      <el-option
-                        v-for="item in group.options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      ></el-option>
-                    </el-option-group>
-                    <el-button slot="append" @click="gotoRemoteConfig" icon="el-icon-link">Contoh konfigurasi</el-button>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="Include:">
-                  <el-input v-model="form.includeRemarks" placeholder="Kata kunci yang terkandung dalam nama simpul, mendukung reguler" />
-                </el-form-item>
-                <el-form-item label="Exclude:">
-                  <el-input v-model="form.excludeRemarks" placeholder="Kata kunci tidak termasuk dalam nama simpul, dukungan reguler" />
-                </el-form-item>
-                <el-form-item label="FileName:">
-                  <el-input v-model="form.filename" placeholder="Nama file langganan yang dikembalikan" />
-                </el-form-item>
                 <el-form-item label-width="0px">
                   <el-row type="flex">
                     <el-col>
                       <el-checkbox v-model="form.nodeList" label="Hanya Proxy" border></el-checkbox>
-                    </el-col>
-                    <el-popover placement="bottom" v-model="form.extraset">
-                      <el-row>
-                        <el-checkbox v-model="form.emoji" label="Emoji"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.scv" label="lewati verifikasi sertifikat"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.udp" @change="needUdp = true" label="Memungkinkan UDP"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.appendType" label="Jenis simpul"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.sort" label="Urutkan simpul"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.fdn" label="Saring node ilegal"></el-checkbox>
-                      </el-row>
-                      <el-button slot="reference">lebih banyak pilihan</el-button>
-                    </el-popover>
-                    <el-popover placement="bottom" style="margin-left: 10px">
-                      <el-row>
-                        <el-checkbox v-model="form.tpl.surge.doh" label="Surge.DoH"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.tpl.clash.doh" label="Clash.DoH"></el-checkbox>
-                      </el-row>
-                      <el-row>
-                        <el-checkbox v-model="form.insert" label="NetEase Cloud"></el-checkbox>
-                      </el-row>
-                      <el-button slot="reference">fungsi kustom</el-button>
-                    </el-popover>
+                    </el-col>                   
                   </el-row>
                 </el-form-item>
               </div>
@@ -118,7 +42,7 @@
                 <i class="el-icon-magic-stick"></i>
               </el-divider>
 
-              <el-form-item label="langganan khusus:">
+              <el-form-item label="Salin link ini:">
                 <el-input class="copy-content" disabled v-model="customSubUrl">
                   <el-button
                     slot="append"
@@ -129,18 +53,6 @@
                   >salinan</el-button>
                 </el-input>
               </el-form-item>
-              <el-form-item label="link pendek:">
-                <el-input class="copy-content" disabled v-model="curtomShortSubUrl">
-                  <el-button
-                    slot="append"
-                    v-clipboard:copy="curtomShortSubUrl"
-                    v-clipboard:success="onCopy"
-                    ref="copy-btn"
-                    icon="el-icon-document-copy"
-                  >salinan</el-button>
-                </el-input>
-              </el-form-item>
-
               <el-form-item label-width="0px" style="margin-top: 40px; text-align: center">
                 <el-button
                   style="width: 120px"
@@ -156,24 +68,7 @@
                   :disabled="customSubUrl.length === 0"
                 >Tautan pendek</el-button>
                 <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">Impor sekali klik Surge</el-button> -->
-              </el-form-item>
-
-              <el-form-item label-width="0px" style="text-align: center">
-                <el-button
-                  style="width: 120px"
-                  type="primary"
-                  @click="dialogUploadConfigVisible = true"
-                  icon="el-icon-upload"
-                  :loading="loading"
-                >Unggah</el-button>
-                <el-button
-                  style="width: 120px"
-                  type="primary"
-                  @click="clashInstall"
-                  icon="el-icon-connection"
-                  :disabled="customSubUrl.length === 0"
-                >Impor Ke Clash</el-button>
-              </el-form-item>
+              </el-form-item>             
             </el-form>
           </el-container>
         </el-card>
@@ -236,20 +131,7 @@ export default {
 
       options: {
         clientTypes: {
-          Clash: "clash",
-          Surge3: "surge&ver=3",
-          Surge4: "surge&ver=4",
-          Quantumult: "quan",
-          QuantumultX: "quanx",
-          Surfboard: "surfboard",
-          Loon: "loon",
-          SSAndroid: "sssub",
-          V2Ray: "v2ray",
-          ss: "ss",
-          ssr: "ssr",
-          ssd: "ssd",
-          ClashR: "clashr",
-          Surge2: "surge&ver=2",
+          Clash: "clash",         
         },
         backendOptions: [{ value: "http://127.0.0.1:25500/sub?" }],
         remoteConfig: [
