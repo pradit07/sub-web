@@ -58,8 +58,7 @@
                   :disabled="form.sourceSubUrl.length === 0"
                 >Gasken</el-button>              
                 <!-- <el-button style="width: 120px" type="primary" @click="surgeInstall" icon="el-icon-connection">Impor sekali klik Surge</el-button> -->
-              </el-form-item> 
-  <iframe src="form.sourceSubUrl.length === 0"></iframe>            
+              </el-form-item>          
             </el-form>
           </el-container>
         </el-card>
